@@ -91,7 +91,7 @@
       isRepeat: false,
       isRepeatOneSong: false,
       indexArray: [],
-      config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
+      config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {Index: 0},
       songs: [
         {
           name: "Ông Trời Làm Tội Anh Chưa",
@@ -277,7 +277,6 @@
               _this.indexArray.length = 0
             _this.indexArray.push(_this.currentIndex)
           }
-          console.log(_this.indexArray)
         }
         
         // xử lý dừng
@@ -464,7 +463,10 @@
         this.isRandom = this.config.isRandom
         this.isRepeat = this.config.isRepeat
         this.isRepeatOneSong = this.config.isRepeatOneSong
-        this.currentIndex = this.config.Index
+        if ("Index" in app.config)
+          this.currentIndex = this.config.Index
+        else  
+          this.currentIndex = 0
         // Object.assign(this, this.config)
         this.handleRepeatAndRandom()
       },
