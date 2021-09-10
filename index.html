@@ -277,6 +277,7 @@
               _this.indexArray.length = 0
             _this.indexArray.push(_this.currentIndex)
           }
+          console.log(_this.indexArray)
         }
         
         // xử lý dừng
@@ -292,24 +293,23 @@
              _this.randomSong()
             audio.play()
           }
-         
-          switch(_this.repeatSong()) {
-            case 1:
-              audio.play()
-              break
-            case 0:
-              _this.nextSong()
-              audio.play()
-              break
-            case -1:
-              if (_this.currentIndex === (_this.songs.length-1))
-                _this.nextSong()
-              else {
+          else {
+            switch(_this.repeatSong()) {
+              case 1:
+                audio.play()
+                break
+              case 0:
                 _this.nextSong()
                 audio.play()
-              }
-                
-            
+                break
+              case -1:
+                if (_this.currentIndex === (_this.songs.length-1))
+                  _this.nextSong()
+                else {
+                  _this.nextSong()
+                  audio.play()
+                }
+            }
           }
         }
         
@@ -433,7 +433,7 @@
           newIndex = Math.floor(Math.random() * this.songs.length)
           if (this.indexArray.length >= this.songs.length)
               this.indexArray.length = 0
-        } while (newIndex === this.currentIndex || this.indexArray.includes(newIndex))
+        } while (newIndex == this.currentIndex || this.indexArray.includes(newIndex))
 
         this.currentIndex = newIndex
         this.loadCurrentSong()
